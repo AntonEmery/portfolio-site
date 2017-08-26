@@ -8,12 +8,41 @@ import './App.css';
 class App extends Component {
   constructor() {
     super()
-    this.state = { loading: true }
+    this.state = {
+      loading: true,
+      projects: [ ]
+    }
   }
+
+  parseProjects = (jsonResponse) => {
+    const posts = jsonResponse.data.posts;
+    const projects = posts.map(post => {
+      return {
+        title:    post.title,
+        slug:    post.slug,
+        img:     post.custom_fields.imageurl[0],
+        tagline: post.custom_fields.tagline
+      }
+    })
+    this.setState({projects})
+  }
+
+  renderProjects = () => (
+    this.state.projects.map(project => {
+      return <ProjectOverview
+        title = {project.title}
+        slug = {project.slug}
+        img = {project.img}
+        tagline = {project.tagline}
+        key = {project.slug}
+      />
+    })
+  )
+
 
   componentDidMount() {
     return axios.get(api.key)
-    .then(res => console.log(res))
+    .then(this.parseProjects)
     .then(this.setState({loading: false}))
   };
 
@@ -21,7 +50,7 @@ class App extends Component {
     const component = () => {
         const isLoading = this.state.loading
         const loader = (<ReactLoading type="bars" color="#444" />)
-        return (isLoading) ? loader : (<ProjectOverview />)
+        return (isLoading) ? loader : (this.renderProjects())
     }
 
     return (

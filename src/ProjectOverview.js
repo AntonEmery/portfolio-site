@@ -3,7 +3,12 @@ import React from 'react';
 
 function ProjectOverview (props) {
     return (
-      <p>testing</p>
+      <div>
+        <p>{props.title}</p>
+        <p>{props.slug}</p>
+        <p>{props.img}</p>
+        <p>{props.tagline}</p>
+      </div>
     )
 }
 
