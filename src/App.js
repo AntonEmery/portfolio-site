@@ -1,26 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import axios from 'axios';
-import api from './api.js';
+import React, { Component } from 'react'
+import ReactLoading from 'react-loading'
+import ProjectOverview from './ProjectOverview'
+import axios from 'axios'
+import api from './api.js'
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = { loading: true }
+  }
 
   componentDidMount() {
     return axios.get(api.key)
     .then(res => console.log(res))
+    .then(this.setState({loading: false}))
   };
 
   render() {
+    const component = () => {
+        const isLoading = this.state.loading
+        const loader = (<ReactLoading type="bars" color="#444" />)
+        return (isLoading) ? loader : (<ProjectOverview />)
+    }
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <article>
+          {component()}
+        </article>
       </div>
     );
   }
