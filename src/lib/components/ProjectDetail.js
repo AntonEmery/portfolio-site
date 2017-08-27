@@ -1,13 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-// Render a project not found if couldn't match by slug name
-function renderNotFound (slug) { return (<p>Project not found: {slug}</p>) }
+import {error, notFound, loading} from '../errors'
 
-// Render an error if something weird happens
-function renderError () { return (<p>Error</p>) }
+// Determine if route slug was set or not
+function slugProvided (props) {
+  // Get route params object
+  const params = props.match.params
 
-// Render a loading screen when no projects avaliable
-function renderLoading () { return (<p>Loading</p>) }
+  // If `:slug` is in params then return it, otherwise return null
+  const slug = (params.hasOwnProperty('slug')) ? params.slug : null
+
+  // If slug is null then something went really wrong
+  if (slug === null) { return false } else { return slug }
+}
 
 // Try to render project if we have some projects and a slug
 function renderProject (projects, slug) {
@@ -25,23 +31,29 @@ function renderProject (projects, slug) {
       </div>
     )
   // If we could not find the project then show `not found`
-  } else { return renderNotFound(slug) }
+  } else { return notFound(slug) }
 }
 
 // Handles the showing of the ProjectDetail
-export default function ProjectDetail (props) {
+function ProjectDetail (props) {
+  // If route params `:slug` not provided then show error
+  if (!slugProvided(props)) { return error() }
+
+  // Get slug from route params
+  const slug = slugProvided(props)
+
   // Get projects from parent component using props
-  const projects = props.projects || []
+  const projects = props.projects
 
-  // Get the `:slug` from the route
-  const slug = props.match.params.slug || null
-
-  // If projects is an empty array show loading and fail fast using return
-  if (projects.length === 0) { return renderLoading() }
-
-  // If slug is null then something went really wrong
-  if (slug === null) { return renderError() }
+  // If projects is an empty array show loading
+  if (projects.length === 0) { return loading() }
 
   // If we get here then attempt to render the right project
   return renderProject(projects, slug)
 }
+
+// Ensure specific variables and types are passed to component
+ProjectDetail.propTypes = { projects: PropTypes.array }
+
+// Export component
+export default ProjectDetail
