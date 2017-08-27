@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {notFound} from '../errors'
+import {notFound} from '../handlers/errors'
 
 // Try to render project if we have some projects and a slug
 export default (projects, slug) => {

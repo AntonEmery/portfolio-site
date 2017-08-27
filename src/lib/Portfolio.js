@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import config from '../config'
 
 import axios from 'axios'
-import ReactLoading from 'react-loading'
+
+import {loading} from './util/handlers/loaders'
 
 import ProjectList from './components/ProjectList'
 import ProjectDetail from './components/ProjectDetail'
@@ -15,7 +16,7 @@ export default class Portfolio extends Component {
 
   state = {
     loading: true,
-    projects: [ ]
+    projects: []
   }
 
   parseProjects = (jsonResponse) => {
@@ -28,7 +29,7 @@ export default class Portfolio extends Component {
         tagline: post.custom_fields.tagline
       }
     })
-    this.setState({projects})
+    this.setState({projects, loading: false})
   }
 
   ProjectList = (props) => {
@@ -55,17 +56,19 @@ export default class Portfolio extends Component {
     </Router>
   )
 
+  // Lets us test that loading animation is working properly
+  delayLoading = (res) => (new Promise((r) => {setTimeout(() => {r(res)}, 2000)}))
+
   componentDidMount() {
     return axios.get(config.url)
+    .then(this.delayLoading)
     .then(this.parseProjects)
-    .then(this.setState({loading: false}))
   }
 
   render() {
     const component = () => {
       const isLoading = this.state.loading
-      const loader = (<ReactLoading type="bars" color="#444" />)
-      return (isLoading) ? loader : (this.renderRouter())
+      return (isLoading) ? loading() : (this.renderRouter())
     }
 
     return (
