@@ -31,7 +31,7 @@ class App extends Component {
     this.setState({projects})
   }
 
-  ProjectListViewComponent = (props) => {
+  ProjectListView = (props) => {
     return <ProjectListView
       projects={this.state.projects}
       {...props}
@@ -49,7 +49,7 @@ class App extends Component {
     <Router>
       <div>
         <p>Menu</p>
-        <Route exact path="/" component={this.ProjectListViewComponent} />
+        <Route exact path="/" component={this.ProjectListView} />
         <Route path="/project/:slug" component={this.ProjectDetailView} />
       </div>
     </Router>
