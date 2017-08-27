@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 
 
@@ -12,13 +12,11 @@ import './App.css';
 
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
+
+    state = {
       loading: true,
       projects: [ ]
     }
-  }
 
   parseProjects = (jsonResponse) => {
     const posts = jsonResponse.data.posts;
@@ -34,9 +32,14 @@ class App extends Component {
   }
 
   ProjectListViewComponent = (props) => {
-    console.log(props)
-    console.log(this.state)
     return <ProjectListView
+      projects={this.state.projects}
+      {...props}
+    />
+  }
+
+  ProjectDetailView = (props) => {
+    return <ProjectDetailView
       projects={this.state.projects}
       {...props}
     />
@@ -47,7 +50,7 @@ class App extends Component {
       <div>
         <p>Menu</p>
         <Route exact path="/" component={this.ProjectListViewComponent} />
-        <Route path="/project/:slug" component={ProjectDetailView} />
+        <Route path="/project/:slug" component={this.ProjectDetailView} />
       </div>
     </Router>
   )

@@ -4,7 +4,6 @@ import ProjectOverview from './ProjectOverview'
 
 
 function ProjectListView (props) {
-  console.log(props.projects)
 
   const renderProjects = (props) => (
     props.projects.map(project => {
