@@ -1,12 +1,12 @@
 import React from 'react'
 
-import ProjectOverview from './ProjectOverview'
+import ProjectListItem from './ProjectListItem'
 
-function ProjectListView (props) {
+export default function ProjectList (props) {
 
   const renderProjects = (props) => (
     props.projects.map(project => {
-      return <ProjectOverview
+      return <ProjectListItem
         title = {project.title}
         slug = {project.slug}
         img = {project.img}
@@ -22,5 +22,3 @@ function ProjectListView (props) {
     </div>
   )
 }
-
-export default ProjectListView

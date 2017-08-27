@@ -7,9 +7,9 @@ import './assets/css/index.css'
 // Register service worker to implement client cache
 import registerServiceWorker from './lib/services/registerServiceWorker'
 
-// Display main app
-import App from './lib/App'
-ReactDOM.render(<App />, document.getElementById('root'))
+// Display portfolio
+import Portfolio from './lib/Portfolio'
+ReactDOM.render(<Portfolio />, document.getElementById('root'))
 
 // Start service worker
 registerServiceWorker()

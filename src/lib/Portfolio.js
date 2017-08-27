@@ -6,12 +6,12 @@ import config from '../config'
 import axios from 'axios'
 import ReactLoading from 'react-loading'
 
-import ProjectListView from '../views/ProjectListView'
-import ProjectDetailView from '../views/ProjectDetailView'
+import ProjectList from './components/ProjectList'
+import ProjectDetail from './components/ProjectDetail'
 
 import '../assets/css/App.css'
 
-class App extends Component {
+export default class Portfolio extends Component {
 
   state = {
     loading: true,
@@ -31,15 +31,15 @@ class App extends Component {
     this.setState({projects})
   }
 
-  ProjectListView = (props) => {
-    return <ProjectListView
+  ProjectList = (props) => {
+    return <ProjectList
       projects={this.state.projects}
       {...props}
     />
   }
 
-  ProjectDetailView = (props) => {
-    return <ProjectDetailView
+  ProjectDetail = (props) => {
+    return <ProjectDetail
       projects={this.state.projects}
       {...props}
     />
@@ -49,8 +49,8 @@ class App extends Component {
     <Router>
       <div>
         <p>Menu</p>
-        <Route exact path="/" component={this.ProjectListView} />
-        <Route path="/project/:slug" component={this.ProjectDetailView} />
+        <Route exact path="/" component={this.ProjectList} />
+        <Route path="/project/:slug" component={this.ProjectDetail} />
       </div>
     </Router>
   )
@@ -77,5 +77,3 @@ class App extends Component {
     )
   }
 }
-
-export default App
