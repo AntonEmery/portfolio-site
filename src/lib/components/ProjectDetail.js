@@ -1,3 +1,4 @@
+// Ensure props are valid using prop-types
 import PropTypes from 'prop-types'
 
 // Helper to find a project by a slug name
