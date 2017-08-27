@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 import ProjectOverview from './ProjectOverview'
 import axios from 'axios'
@@ -18,7 +19,7 @@ class App extends Component {
     const posts = jsonResponse.data.posts;
     const projects = posts.map(post => {
       return {
-        title:    post.title,
+        title:   post.title,
         slug:    post.slug,
         img:     post.custom_fields.imageurl[0],
         tagline: post.custom_fields.tagline
@@ -39,7 +40,6 @@ class App extends Component {
     })
   )
 
-
   componentDidMount() {
     return axios.get(api.key)
     .then(this.parseProjects)
@@ -48,9 +48,9 @@ class App extends Component {
 
   render() {
     const component = () => {
-        const isLoading = this.state.loading
-        const loader = (<ReactLoading type="bars" color="#444" />)
-        return (isLoading) ? loader : (this.renderProjects())
+      const isLoading = this.state.loading
+      const loader = (<ReactLoading type="bars" color="#444" />)
+      return (isLoading) ? loader : (this.renderProjects())
     }
 
     return (
