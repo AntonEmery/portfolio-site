@@ -10,7 +10,7 @@ const style = {
   }
 }
 
-export const loading = () => (
+export default () => (
   <Center>
     <div style={style.loader}>
       <ReactLoading type="bars" color="#444" />

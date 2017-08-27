@@ -5,10 +5,10 @@ import config from '../config'
 
 import axios from 'axios'
 
-import {loading} from './util/handlers/loaders'
+import renderLoading from './components/Loading'
 
-import ProjectList from './components/ProjectList'
-import ProjectDetail from './components/ProjectDetail'
+import ProjectList from './routes/ProjectList'
+import ProjectDetail from './routes/ProjectDetail'
 
 import '../assets/css/App.css'
 
@@ -68,7 +68,7 @@ export default class Portfolio extends Component {
   render() {
     const component = () => {
       const isLoading = this.state.loading
-      return (isLoading) ? loading() : (this.renderRouter())
+      return (isLoading) ? renderLoading() : (this.renderRouter())
     }
 
     return (
