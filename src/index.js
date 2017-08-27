@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Import main css
-import './css/index.css'
+import './assets/css/index.css'
 
 // Register service worker to implement client cache
-import registerServiceWorker from './services/registerServiceWorker'
+import registerServiceWorker from './lib/services/registerServiceWorker'
 
 // Display main app
 import App from './lib/App'
