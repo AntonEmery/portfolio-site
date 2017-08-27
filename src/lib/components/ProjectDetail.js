@@ -1,6 +1,5 @@
-import React from 'react'
-
 import renderNotFound from '../routes/NotFound'
+import projectDetailTemplate from '../templates/ProjectDetail'
 
 // Try to render project if we have some projects and a slug
 export default (projects, slug) => {
@@ -12,11 +11,7 @@ export default (projects, slug) => {
 
   // If project found then show title
   if (project) {
-    return (
-      <div>
-        <p>{project.title}</p>
-      </div>
-    )
+    return projectDetailTemplate(project)
   // If we could not find the project then show `not found`
   } else { return renderNotFound(slug) }
 }
