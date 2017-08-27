@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react'
+
 import ProjectOverview from './ProjectOverview'
-
-
 
 function ProjectListView (props) {
 

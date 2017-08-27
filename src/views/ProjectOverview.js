@@ -1,9 +1,8 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-
-
 function ProjectOverview (props) {
+    const detailLinkTo = `/project/${props.slug}`
     return (
       <div>
         <p>{props.title}</p>
@@ -11,9 +10,9 @@ function ProjectOverview (props) {
         <p>{props.img}</p>
         <p>{props.tagline}</p>
 
-        <Link to={`/project/${props.slug}`}>Project Details</Link>
+        <Link to={detailLinkTo}>Project Details</Link>
       </div>
     )
 }
 
-export default ProjectOverview;
+export default ProjectOverview

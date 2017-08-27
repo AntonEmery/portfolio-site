@@ -1,8 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+// Import main css
+import './css/index.css'
+
+// Register service worker to implement client cache
+import registerServiceWorker from './services/registerServiceWorker'
+
+// Display main app
+import App from './lib/App'
+ReactDOM.render(<App />, document.getElementById('root'))
+
+// Start service worker
+registerServiceWorker()

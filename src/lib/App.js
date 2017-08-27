@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import ReactLoading from 'react-loading'
 
-
-import ProjectListView from './ProjectListView'
-import ProjectDetailView from './ProjectDetailView'
+import config from '../config'
 
 import axios from 'axios'
-import api from './api.js'
-import './App.css';
+import ReactLoading from 'react-loading'
 
+import ProjectListView from '../views/ProjectListView'
+import ProjectDetailView from '../views/ProjectDetailView'
+
+import '../assets/css/App.css'
 
 class App extends Component {
 
-    state = {
-      loading: true,
-      projects: [ ]
-    }
+  state = {
+    loading: true,
+    projects: [ ]
+  }
 
   parseProjects = (jsonResponse) => {
-    const posts = jsonResponse.data.posts;
+    const posts = jsonResponse.data.posts
     const projects = posts.map(post => {
       return {
         title:   post.title,
@@ -56,10 +56,10 @@ class App extends Component {
   )
 
   componentDidMount() {
-    return axios.get(api.key)
+    return axios.get(config.url)
     .then(this.parseProjects)
     .then(this.setState({loading: false}))
-  };
+  }
 
   render() {
     const component = () => {
@@ -74,8 +74,8 @@ class App extends Component {
           {component()}
         </article>
       </div>
-    );
-}
+    )
+  }
 }
 
-export default App;
+export default App

@@ -1,11 +1,9 @@
-import React from 'react';
-
+import React from 'react'
 
 function ProjectDetailView (props) {
   console.log(props)
   // look at props.projects filter by project.slug === props.match.parms <--
   // this gives you just the details for your individual project
-
 
   let project = props.projects.filter(singleProject => {
     return singleProject.slug === props.match.params.slug
@@ -19,7 +17,7 @@ function ProjectDetailView (props) {
     </div>
   )
   */
-  
+
   console.log(project)
   if(project.length > 0) {
     return (
