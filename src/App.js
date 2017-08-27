@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import ReactLoading from 'react-loading'
-import ProjectOverview from './ProjectOverview'
+
+
+import ProjectListView from './ProjectListView'
+import ProjectDetailView from './ProjectDetailView'
+
 import axios from 'axios'
 import api from './api.js'
 import './App.css';
+
 
 class App extends Component {
   constructor() {
@@ -28,16 +33,23 @@ class App extends Component {
     this.setState({projects})
   }
 
-  renderProjects = () => (
-    this.state.projects.map(project => {
-      return <ProjectOverview
-        title = {project.title}
-        slug = {project.slug}
-        img = {project.img}
-        tagline = {project.tagline}
-        key = {project.slug}
-      />
-    })
+  ProjectListViewComponent = (props) => {
+    console.log(props)
+    console.log(this.state)
+    return <ProjectListView
+      projects={this.state.projects}
+      {...props}
+    />
+  }
+
+  renderRouter = () => (
+    <Router>
+      <div>
+        <p>Menu</p>
+        <Route exact path="/" component={this.ProjectListViewComponent} />
+        <Route path="/project/:slug" component={ProjectDetailView} />
+      </div>
+    </Router>
   )
 
   componentDidMount() {
@@ -50,7 +62,7 @@ class App extends Component {
     const component = () => {
       const isLoading = this.state.loading
       const loader = (<ReactLoading type="bars" color="#444" />)
-      return (isLoading) ? loader : (this.renderProjects())
+      return (isLoading) ? loader : (this.renderRouter())
     }
 
     return (
@@ -60,7 +72,7 @@ class App extends Component {
         </article>
       </div>
     );
-  }
+}
 }
 
 export default App;
