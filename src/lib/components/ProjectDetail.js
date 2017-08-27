@@ -1,38 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {error, notFound, loading} from '../errors'
+// Helper to find a project by a slug name
+import renderProjectBySlug from './util/helpers/projectBySlug'
 
-// Determine if route slug was set or not
-function slugProvided (props) {
-  // Get route params object
-  const params = props.match.params
+// Helper to determine if a slug was provided on route params
+import slugProvided from './util/helpers/slugProvided'
 
-  // If `:slug` is in params then return it, otherwise return null
-  const slug = (params.hasOwnProperty('slug')) ? params.slug : null
-
-  // If slug is null then something went really wrong
-  if (slug === null) { return false } else { return slug }
-}
-
-// Try to render project if we have some projects and a slug
-function renderProject (projects, slug) {
-  // Create filter fn using route `:slug` to match specific project
-  let findProject = project => project.slug === slug
-
-  // Iterate over projects and find the project that matches our route `:slug`
-  let project = projects.find(findProject)
-
-  // If project found then show title
-  if (project) {
-    return (
-      <div>
-        <p>{project.title}</p>
-      </div>
-    )
-  // If we could not find the project then show `not found`
-  } else { return notFound(slug) }
-}
+// Use the shared error handlers
+import {error, loading} from './util/errors'
 
 // Handles the showing of the ProjectDetail
 function ProjectDetail (props) {
@@ -49,7 +25,7 @@ function ProjectDetail (props) {
   if (projects.length === 0) { return loading() }
 
   // If we get here then attempt to render the right project
-  return renderProject(projects, slug)
+  return renderProjectBySlug(projects, slug)
 }
 
 // Ensure specific variables and types are passed to component
