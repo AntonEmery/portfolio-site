@@ -3,11 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "1.0.11"
+    "@types/enzyme": "^2.8.6",
+    "enzyme": "^2.9.1",
+    "faker": "^4.1.0",
+    "react-addons-test-utils": "^15.6.0",
+    "react-scripts": "1.0.11",
+    "react-test-renderer": "^15.6.1"
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-center": "^1.1.1",
     "react-dom": "^15.6.1",
     "react-loading": "^0.1.4",
     "react-router-dom": "^4.2.2"
