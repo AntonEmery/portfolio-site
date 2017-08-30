@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 import Loading from '../components/Loading'
 
 // Get the rendered project list
-import renderProjectList from '../components/ProjectList'
+import renderProjectListWrapper from '../components/ProjectListWrapper'
 
 // Handles the showing of the ProjectList
 function ProjectList (props) {
   if (props.projects.length > 0) {
     // Attempt to render the list of projects
-    return renderProjectList(props)
+    return renderProjectListWrapper(props)
   } else {
     return Loading()
   }

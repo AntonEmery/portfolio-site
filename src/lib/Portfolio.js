@@ -6,6 +6,7 @@ import config from '../config'
 import axios from 'axios'
 
 import renderLoading from './components/Loading'
+import Menu from './components/Menu'
 
 import ProjectList from './routes/ProjectList'
 import ProjectDetail from './routes/ProjectDetail'
@@ -46,10 +47,10 @@ export default class Portfolio extends Component {
     />
   }
 
-  renderRouter = () => (
+  renderRouter = (menuItems) => (
     <Router>
       <div>
-        <p>Menu</p>
+        <Menu menuItems={menuItems} />
         <Route exact path="/" component={this.ProjectList} />
         <Route path="/project/:slug" component={this.ProjectDetail} />
       </div>
@@ -66,16 +67,19 @@ export default class Portfolio extends Component {
   }
 
   render() {
+    const menuItems = ['Home', 'About', 'Contact']
     const component = () => {
       const isLoading = this.state.loading
-      return (isLoading) ? renderLoading() : (this.renderRouter())
+      return (isLoading) ? renderLoading() : (this.renderRouter(menuItems))
     }
 
     return (
-      <div className="App">
-        <article>
-          {component()}
-        </article>
+      <div className="wrapper">
+        <div className="App">
+          <article>
+            {component()}
+          </article>
+        </div>
       </div>
     )
   }
